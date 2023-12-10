@@ -5,7 +5,7 @@ import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 const Footer = () => {
   return (
     <div className="w-full pt-20 bg-white text-gray-500 px-8">
-      <div className="flex flex-col max-w-[1240px] px-2 py-4 mx-auto justify-between sm:flex-row border-b border-gray-500">
+      <div className="flex flex-col max-w-[1240px] px-2 py-4 mx-auto justify-between sm:flex-row border-b border-gray-300">
         <div>
           <a href="#">
             <img src={logo} className="py-2" />
@@ -29,7 +29,9 @@ const Footer = () => {
             </h6>
             <ul>
               <li className="py-2 hover:text-primary delay-150">Testimonial</li>
-              <li className="py-2 hover:text-primary delay-150">For Jobseeker</li>
+              <li className="py-2 hover:text-primary delay-150">
+                For Jobseeker
+              </li>
               <li className="py-2 hover:text-primary delay-150">For Company</li>
             </ul>
           </div>
@@ -39,8 +41,12 @@ const Footer = () => {
             </h6>
             <ul>
               <li className="py-2 hover:text-primary delay-150">Career Tips</li>
-              <li className="py-2 hover:text-primary delay-150">Trending Job</li>
-              <li className="py-2 hover:text-primary delay-150">Bonafide Company</li>
+              <li className="py-2 hover:text-primary delay-150">
+                Trending Job
+              </li>
+              <li className="py-2 hover:text-primary delay-150">
+                Bonafide Company
+              </li>
             </ul>
           </div>
           <div>
@@ -55,13 +61,15 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col max-w-[1240px] px-2 py-4 mx-auto justify-between sm:flex-row text-center text-gray-500">
+      <div className="flex flex-col max-w-[1240px] px-2 py-2 mx-auto justify-between sm:flex-row text-center text-gray-500">
         <p className="py-4">© Copyright Lokergo 2023. All rights reserved</p>
-        <div className="flex justify-between sm:w-[500px] py-4 text-black">
-          <h6>Privacy Policy</h6>
-          <h6>Terms & Conditions</h6>
-          <h6>Cookie Policy</h6>
-        </div>
+        <a
+          href="#"
+          className="flex justify-between sm:w-[500px] py-4 text-black">
+          <h6 className="hover:text-primary delay-150">Privacy Policy</h6>
+          <h6 className="hover:text-primary delay-150">Terms & Conditions</h6>
+          <h6 className="hover:text-primary delay-150">Cookie Policy</h6>
+        </a>
       </div>
     </div>
   );

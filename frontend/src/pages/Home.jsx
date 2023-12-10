@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import all from "../assets/images/all.svg";
 import management from "../assets/images/management.svg";
 import finance from "../assets/images/finance.svg";
 import human from "../assets/images/human.svg";
 import retail from "../assets/images/retail.svg";
 import content from "../assets/images/content.svg";
+import { IoLocationOutline } from "react-icons/io5";
+import { LuBookmarkPlus } from "react-icons/lu";
+import { FaArrowRightLong } from "react-icons/fa6";
+import { SlLocationPin } from "react-icons/sl";
+import { GoSearch } from "react-icons/go";
+import { PiSuitcaseSimple } from "react-icons/pi";
+import { data } from "../../../backend/data";
+import value from "../assets/images/value.png";
+import hero from "../assets/images/hero.png";
 
 const stats = [
   { name: "Jobs", value: "550K" },
@@ -21,6 +30,57 @@ const bidang = [
 ];
 
 const Home = () => {
+  const [search, setSearch] = useState("");
+
+  const [visibleData, setVisibleData] = useState([]);
+
+  useEffect(() => {
+    // Ambil 6 data pertama dari JSON lokal
+    const initialData = data.slice(0, 6);
+    setVisibleData(initialData);
+  }, []);
+
+  const [selectedValue, setSelectedValue] = useState("");
+  const handleSelectChange = (event) => {
+    setSelectedValue(event.target.value);
+  };
+  const [dataSet] = useState([
+    { id: "1", nama: "ACEH" },
+    { id: "2", nama: "SUMATERA UTARA" },
+    { id: "3", nama: "SUMATERA BARAT" },
+    { id: "4", nama: "RIAU" },
+    { id: "5", nama: "JAMBI" },
+    { id: "6", nama: "SUMATERA SELATAN" },
+    { id: "7", nama: "BENGKULU" },
+    { id: "8", nama: "LAMPUNG" },
+    { id: "9", nama: "KEPULAUAN BANGKA BELITUNG" },
+    { id: "10", nama: "KEPULAUAN RIAU" },
+    { id: "11", nama: "DKI JAKARTA" },
+    { id: "12", nama: "JAWA BARAT" },
+    { id: "13", nama: "JAWA TENGAH" },
+    { id: "14", nama: "DAERAH ISTIMEWA YOGYAKARTA" },
+    { id: "15", nama: "JAWA TIMUR" },
+    { id: "16", nama: "BANTEN" },
+    { id: "17", nama: "BALI" },
+    { id: "18", nama: "NUSA TENGGARA BARAT" },
+    { id: "19", nama: "NUSA TENGGARA TIMUR" },
+    { id: "20", nama: "KALIMANTAN BARAT" },
+    { id: "21", nama: "KALIMANTAN TENGAH" },
+    { id: "22", nama: "KALIMANTAN SELATAN" },
+    { id: "23", nama: "KALIMANTAN TIMUR" },
+    { id: "24", nama: "KALIMANTAN UTARA" },
+    { id: "25", nama: "SULAWESI UTARA" },
+    { id: "26", nama: "SULAWESI TENGAH" },
+    { id: "27", nama: "SULAWESI SELATAN" },
+    { id: "28", nama: "SULAWESI TENGGARA" },
+    { id: "29", nama: "GORONTALO" },
+    { id: "30", nama: "SULAWESI BARAT" },
+    { id: "31", nama: "MALUKU" },
+    { id: "32", nama: "MALUKU UTARA" },
+    { id: "33", nama: "PAPUA" },
+    { id: "34", nama: "PAPUA BARAT" },
+  ]);
+
   return (
     <>
       {/* ===== HERO SECTION ===== */}
@@ -42,17 +102,72 @@ const Home = () => {
                     untuk menemukan lowongan pekerjaan di berbagai industri dan
                     sektor
                   </p>
-                  <a
-                    href="#"
-                    className="mt-5 inline-block rounded-md border border-transparent bg-primary px-8 py-3 leading-8 text-center font-medium text-white hover:bg-hover">
-                    Coba Sekarang
-                  </a>
+                  <div className="bg-white flex flex-row rounded-md shadow-md justify-between mt-12 p-[10px] min-[360px]:flex-wrap">
+                    <div className="flex md:divide-x max-[390px]:divide-y min-[360px]:flex-wrap">
+                      <div className="mr-5 self-center">
+                        <form className="flex items-center p-2">
+                          <PiSuitcaseSimple className="mr-1 text-gray-500" />
+                          <select
+                            value={selectedValue}
+                            onChange={handleSelectChange}
+                            name=""
+                            id="relevance"
+                            className="gb-white text-gray-500 rounded-[3px] lg:w-[5.5rem] min-[360px]:w-[14rem]">
+                            <option value="">Category</option>
+                            {data.map((data) => (
+                              <option key={data.id} value={data.category}>
+                                {data.category}
+                              </option>
+                            ))}
+                          </select>
+                        </form>
+                      </div>
+                      <div className="mr-5 self-center">
+                        <form className="flex items-center p-2">
+                          <SlLocationPin className="mr-1 text-gray-500" />
+                          <select
+                            value={selectedValue}
+                            onChange={handleSelectChange}
+                            name=""
+                            id="relevance"
+                            className="gb-white text-gray-500 rounded-[3px] lg:w-[6rem] min-[360px]:w-[14rem]">
+                            <option value="">Location</option>
+                            {dataSet.map((item) => (
+                              <option key={item.id} value={item.nama}>
+                                {item.nama}
+                              </option>
+                            ))}
+                          </select>
+                        </form>
+                      </div>
+                      <div className="mr-5 self-center">
+                        <div className="flex items-center p-2">
+                          <GoSearch className="mr-1 text-gray-500" />
+                          <form>
+                            <input
+                              onChange={(e) => setSearch(e.target.value)}
+                              placeholder="Search Job...."
+                              type="text"
+                              className="bg-transparent text-gray-500 focus:outline-none lg:w-[50px] min-[360px]:w-[210px]"
+                            />
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="self-center">
+                      <button className="lg:w-[70px] min-[360px]:w-[290px] rounded-md bg-primary px-3.5 py-2.5 text-sm font-reguler text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white hover:bg-hover hover:drop-shadow-lg transition ease-in-out delay-50 hover:-translate-y-0.5 duration-300">
+                        <a href="/jobs" className="flex justify-center">
+                          Search
+                        </a>
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
               <img
-                src="https://tailwindui.com/img/component-images/dark-project-app-screenshot.png"
+                src={hero}
                 alt="Product screenshot"
-                className="w-[48rem] max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem] md:-ml-4 lg:-ml-0"
+                className="w-[48rem] max-w-none  ring-gray-400/10 sm:w-[57rem] md:-ml-4 lg:-ml-0"
                 width={2432}
                 height={1442}
               />
@@ -62,7 +177,7 @@ const Home = () => {
       </section>
       {/* ===== PERFORMANCE SECTION ===== */}
       <section className="performance">
-        <div className="relative isolate overflow-hidden bg-darkGrey py-20 sm:py-20">
+        <div className="relative isolate overflow-hidden bg-darkGray py-20 sm:py-20">
           <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:px-20 lg:max-w-none lg:grid-cols-2 items-center">
             <div className="mx-auto max-w-2xl lg:mx-0">
               <h2 className="text-5xl mx-auto sm:static font-bold tracking-tight text-black text-center">
@@ -70,11 +185,9 @@ const Home = () => {
               </h2>
             </div>
             <div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
-              <dl className="grid grid-cols-3 text-center lg:grid-cols-3">
+              <dl className="grid grid-cols-3 divide-x-2 divide-gray-300 text-center lg:grid-cols-3">
                 {stats.map((stat) => (
-                  <div
-                    key={stat.name}
-                    className="flex flex-col px-5 border-r-2">
+                  <div key={stat.name} className="flex flex-col px-5">
                     <dt className="text-base leading-7 text-black">
                       {stat.name}
                     </dt>
@@ -143,7 +256,7 @@ const Home = () => {
               <div className="relative mt-16 h-80 lg:mt-8">
                 <img
                   className="absolute left-0 top-0 w-[58rem] max-w-none rounded-md bg-white/5 ring-1 ring-white/10"
-                  src="https://tailwindui.com/img/component-images/dark-project-app-screenshot.png"
+                  src={value}
                   alt="App screenshot"
                   width={1824}
                   height={1080}
@@ -231,21 +344,81 @@ const Home = () => {
               </ul>
             </div>
           </div>
+
+          <div className="lg:col-span-3 lex-wrap">
+            <div className="flex flex-wrap gap-5 px-8 pt-5 justify-center items-center">
+              {visibleData.map((item) => {
+                return (
+                  <>
+                    <div>
+                      <div
+                        key={item.id}
+                        className="w-[280px] h-[280px] p-[20px] border-[1px] bg-gray-50 rounded-md hover:bg-white hover:shadow-lg hover:border-primary transition ease-in-out delay-100 hover:-translate-y-1 duration-300">
+                        <div className="flex flex-col justify-between">
+                          <div className="flex justify-between gap-3">
+                            <img
+                              src={item.link_image}
+                              alt="Company Logo"
+                              className="w-[50px] h-[50px] self-start p-1 rounded border border-gray-200"
+                            />
+                            <div
+                              className="flex flex-col self-start truncate"
+                              aria-label="company-label">
+                              <h3 className="text-md text-ellipsis font-semibold block hover:text-primary transition ease-in-out delay-100 duration-300">
+                                {item.company}
+                              </h3>
+                              <div className=" flex text-sm gap-1 text-black">
+                                <h2 className="flex items-center">
+                                  <IoLocationOutline /> {item.location}
+                                </h2>
+                              </div>
+                            </div>
+                            <div className="w-50 h-50 p-1 self-start rounded border border-gray-200">
+                              <LuBookmarkPlus />
+                            </div>
+                          </div>
+                          <div className="pt-5">
+                            <button className="rounded-md truncate bg-gray-200 p-1.5 text-sm font-medium text-gray-500 shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white hover:text-primary transition ease-in-out delay-100 duration-300">
+                              {item.work_type}
+                            </button>
+                          </div>
+                          <div className="flex-col justify-between truncate items-center gap-4 pt-5">
+                            <a href="">
+                              <h1 className="text-[16px] font-semmibold text-color truncate hover:text-primary transition ease-in-out delay-100 duration-300">
+                                {item.job_title}
+                              </h1>
+                            </a>
+                          </div>
+                          <p className="text-[13px] text-[#959595] truncate pt-5">
+                            Skills: {item.skills}
+                          </p>
+                          <div className="flex gap-x-2 pt-5 justify-between">
+                            <div className="flex truncate">
+                              <h1 className="text-md font-bold self-end truncate text-primary">
+                                {item.salary}
+                              </h1>
+                              <h2 className="text-xs text-gray-400 self-end">
+                                /Month
+                              </h2>
+                            </div>
+                            <button className="border rounded block p-1 w-[40%] text-[12px] font-medium text-primary border-primary hover:bg-primary hover:border-primary hover:text-white transition ease-in-out delay-100 duration-300">
+                              <a href="/jobs">Apply Now</a>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                );
+              })}
+            </div>
+          </div>
+
           <div className="text-center py-10">
             <button className="rounded-md bg-primary px-3.5 py-2.5 text-sm font-reguler text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white hover:bg-hover hover:drop-shadow-lg transition ease-in-out delay-50 hover:-translate-y-0.5 duration-300">
-              <a href="/jobs" className="flex">
+              <a href="/jobs" className="flex items-center">
                 Selengkapnya
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  className="w-5 h-5.5 ml-1">
-                  <path
-                    fillRule="evenodd"
-                    d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
-                    clipRule="evenodd"
-                  />
-                </svg>
+                <FaArrowRightLong className="ml-2" />
               </a>
             </button>
           </div>

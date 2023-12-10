@@ -12,7 +12,7 @@ export default {
         textColor: "#4E545F",
         textgrey: "#848FAC",
         hover: "#2955bb",
-        darkGrey: "#f2f6fcff",
+        darkGray: "#f2f6fcff",
       },
       boxShadow: {
         panelShadow: "rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;",
