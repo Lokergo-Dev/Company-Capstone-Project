@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -11,6 +12,18 @@ const Login = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  function handleSubmit(event) {
+    event.preventDefault();
+    axios
+      .post("http://localhost:8090/login", formData)
+      .then((res) => {
+        console.log(res);
+        console.log(res.data);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  }
   return (
     <>
       {/*
@@ -34,7 +47,7 @@ const Login = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST">
+          <form className="space-y-6" onSubmit={handleSubmit} method="POST">
             <div>
               <label
                 htmlFor="email"
@@ -49,6 +62,8 @@ const Login = () => {
                   autoComplete="email"
                   required
                   className="block w-full rounded-md border-0 px-3 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6"
+                  value={formData.email}
+                  onChange={handleInputChange}
                 />
               </div>
             </div>
@@ -75,6 +90,8 @@ const Login = () => {
                   autoComplete="current-password"
                   required
                   className="block w-full rounded-md border-0 px-3 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6"
+                  value={formData.password}
+                  onChange={handleInputChange}
                 />
               </div>
             </div>

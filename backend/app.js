@@ -21,11 +21,18 @@ app.use(session({
 }));
 
 const db = mysql.createConnection({
-    host: '127.0.0.1',
+    host: '34.142.149.98',
     user: 'root',
-    password: '',
-    database: 'lokergo_test',
+    password: 'password',
+    database: 'vr_db',
 });
+
+const authorizeMiddleware = (req, res, next) => {
+    if (!req.session.user) {
+      return res.status(401).json({ error: 'Unauthorized: Not logged in' });
+    }
+    next();
+  };
 
 db.connect((err) => {
     if (err) {
@@ -54,24 +61,42 @@ app.post('/login', (req, res) => {
                 user_study_level: results[0].user_study_level,
                 user_loc: results[0].user_location,
             };
-            req.session.save(() => {
-                res.redirect('/beranda');
-            });
+            res.status(200).json({ auth: true, message: 'Login successful.' , user: req.session.user});
         } else {
             res.status(401).json({ auth: false, message: 'Invalid username or password.' });
         }
     });
 });
 
-app.get('/beranda', (req, res) => {
+app.get('/jobs', authorizeMiddleware, (req, res) => {
     const userData = req.session.user;
 
-    const apiUrl = 'https://demo-deploy-pahri-uesoclnloa-uc.a.run.app';
-
+    const apiUrl = 'https://deploy-model-uesoclnloa-et.a.run.app';
     // Menggunakan metode POST untuk mengirim data ke API
     axios.post(apiUrl, userData)
         .then(response => {
-            res.json(response.data);
+            const parsedData = response.data;
+
+            // Menghapus karakter \r\n pada key objek1
+            for (const key in parsedData[1]) {
+                if (Object.prototype.hasOwnProperty.call(parsedData[1], key)) {
+                    const newKey = key.replace(/\r\n/g, '');
+                    parsedData[1][newKey] = parsedData[1][key];
+                    delete parsedData[1][key];
+                }
+            }
+
+            // Menghapus karakter \r\n pada key objek2
+            for (const key in parsedData[2]) {
+                if (Object.prototype.hasOwnProperty.call(parsedData[2], key)) {
+                    const newKey = key.replace(/\r\n/g, '');
+                    parsedData[2][newKey] = parsedData[2][key];
+                    delete parsedData[2][key];
+                }
+            }
+
+            // Langsung mengirim objek sebagai respons JSON
+            res.json(parsedData);
         })
         .catch(error => {
             console.error('Error sending request to API:', error.message);
@@ -82,3 +107,4 @@ app.get('/beranda', (req, res) => {
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
+
