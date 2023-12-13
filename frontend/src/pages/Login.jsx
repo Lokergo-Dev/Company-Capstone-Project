@@ -30,11 +30,11 @@ const Login = () => {
         if (sessionStorage.getItem("token")){
           setTimeout(() => {
            return location.href = "/jobs";
-          }, 1000);
+          }, 300);
         } else {
           setTimeout(() => {
             return location.href = "/home";
-          }, 1000);
+          }, 300);
         }
       })
       .catch((error) => {

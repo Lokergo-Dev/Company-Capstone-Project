@@ -10,6 +10,9 @@ function LogoutButton({ onClick }) {
     if (onClick) {
       onClick();
     }
+    setTimeout(() => {
+      window.location.href = "/login";
+    }, 300);
   };
 
   return <button className="bg-primary py-2 px-6 text-white font-[600] h-[44px] flex items-center justify-center rounded-[8px] hover:bg-hover hover:drop-shadow-lg transition ease-in-out delay-50 hover:-translate-y-0.5 duration-300"
