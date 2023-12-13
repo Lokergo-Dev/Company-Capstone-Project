@@ -4,6 +4,9 @@ const cors = require('cors');
 const mysql = require('mysql2');
 const session = require('express-session');
 const axios = require('axios');
+const jwt = require('jsonwebtoken');
+
+require('dotenv').config();
 
 
 const app = express();
@@ -21,18 +24,11 @@ app.use(session({
 }));
 
 const db = mysql.createConnection({
-    host: '34.142.149.98',
-    user: 'root',
-    password: 'password',
-    database: 'vr_db',
+    host: process.env.DBHOST,
+    user: process.env.DBUSER,
+    password: process.env.DBPASS,
+    database: process.env.DBNAME,
 });
-
-const authorizeMiddleware = (req, res, next) => {
-    if (!req.session.user) {
-      return res.status(401).json({ error: 'Unauthorized: Not logged in' });
-    }
-    next();
-  };
 
 db.connect((err) => {
     if (err) {
@@ -54,21 +50,39 @@ app.post('/login', (req, res) => {
         }
 
         if (results.length > 0) {
+            const token = jwt.sign({ id: results[0].id }, 'lokergo_token', { expiresIn: 86400 });
+
+            res.cookie('authToken', token, { httpOnly: false, secure: false });
+
+            req.session.authToken = token;
             req.session.user = {
+
                 user_id: results[0].id.toString(),
                 user_preference: results[0].user_preference,
                 user_skill: results[0].user_skill,
                 user_study_level: results[0].user_study_level,
                 user_loc: results[0].user_location,
             };
-            res.status(200).json({ auth: true, message: 'Login successful.' , user: req.session.user});
+            req.session.save();
+            res.status(200).json({ auth: true, message: 'Login success', token: token, user: req.session.user });
         } else {
             res.status(401).json({ auth: false, message: 'Invalid username or password.' });
         }
     });
 });
 
-app.get('/jobs', authorizeMiddleware, (req, res) => {
+app.get('/logout', (req, res) => {
+    req.session.destroy(err => {
+      if (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Failed to destroy session' });
+      } else {
+        res.json({ success: true });
+      }
+    });
+  });
+
+app.get('/jobs', (req, res) => {
     const userData = req.session.user;
 
     const apiUrl = 'https://deploy-model-uesoclnloa-et.a.run.app';
