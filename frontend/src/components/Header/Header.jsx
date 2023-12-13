@@ -4,6 +4,19 @@ import logo from "../../assets/images/logo.svg";
 import userImg from "../../assets/images/avatar-icon.png";
 import { BiMenu } from "react-icons/bi";
 
+function LogoutButton({ onClick }) {
+  const handleLogout = () => {
+    sessionStorage.clear(); // Memanggil fungsi clear untuk menghapus semua data dari sessionStorage
+    if (onClick) {
+      onClick();
+    }
+  };
+
+  return <button className="bg-primary py-2 px-6 text-white font-[600] h-[44px] flex items-center justify-center rounded-[8px] hover:bg-hover hover:drop-shadow-lg transition ease-in-out delay-50 hover:-translate-y-0.5 duration-300"
+  onClick={handleLogout}>Logout</button>;
+}
+
+
 const navLinks = [
   {
     path: "/Home",
@@ -82,11 +95,17 @@ const Header = () => {
               </Link>
             </div>
 
-            <Link to="/login">
-              <button className="bg-primary py-2 px-6 text-white font-[600] h-[44px] flex items-center justify-center rounded-[8px] hover:bg-hover hover:drop-shadow-lg transition ease-in-out delay-50 hover:-translate-y-0.5 duration-300">
-                Masuk
-              </button>
-            </Link>
+            {sessionStorage.getItem("token") ? (
+              <LogoutButton />
+            ) : (
+              <Link to="/login">
+                <button className="bg-primary py-2 px-6 text-white font-[600] h-[44px] flex items-center justify-center rounded-[8px] hover:bg-hover hover:drop-shadow-lg transition ease-in-out delay-50 hover:-translate-y-0.5 duration-300">
+                  Masuk
+                </button>
+              </Link>
+            )}
+
+            
 
             <span className="md:hidden" onClick={toggleMenu}>
               <BiMenu className="w-6 h-6 cursor-pointer" />
