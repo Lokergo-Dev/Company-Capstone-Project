@@ -185,7 +185,7 @@ app.post("/getJobs", (req, res) => {
 
         const recommendation = results[0].user_1st_recommendation.split(',').map(item => item.trim().replace(/'/g, ''));
 
-        query1 = `SELECT * FROM pekerjaan WHERE job_id IN (${recommendation.map(id => mysql.escape(id)).join(',')}) LIMIT 2`;
+        query1 = `SELECT * FROM pekerjaan WHERE job_id IN (${recommendation.map(id => mysql.escape(id)).join(',')}) LIMIT 1`;
         db.query(query1, (err, results) => {
                 if (err) {
                     console.error('Error querying MySQL:', err);

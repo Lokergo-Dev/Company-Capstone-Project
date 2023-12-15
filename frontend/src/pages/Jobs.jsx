@@ -74,7 +74,7 @@ const Jobs = () => {
         console.log(res.data);
         setJobsData(res.data);
         
-        console.log(jobsData);
+        // console.log(jobsData);
         // const cleanedData = res.data.map(item => ({
         //   id: item.id,
         //   job_id: item.job_id.trim(),
@@ -93,7 +93,7 @@ const Jobs = () => {
         //   link_image: item.link_image.trim()
         // }));
 
-        setCleanedData(cleanedData);
+        // setCleanedData(cleanedData);
         // console.log(cleanedData);
         setIsLoading(false);
         

@@ -1,19 +1,19 @@
 export const data = [
   {
-    id: 882,
-    job_id: "rngl181",
-    job_title: "Admin Finance",
-    company: "CITRANET (PT Jembatan Citra Nusantara)",
-    category: "Finance Accounting",
-    location: "Kapanewon Wonosari, Gunungkidul, DI Yogyakarta, Indonesia",
-    work_type: "Kontrak",
-    working_type: "Tidak ditampilkan",
-    salary: "Rp2jt-Rp3jt",
-    experience: "Kurang dari setahun",
-    skills: "Microsoft Excel",
-    study_requirement: "SMA/SMK",
-    link: "https://glints.com/id/opportunities/jobs/admin-finance/a55dab63-8506-4263-9c9c-359879526443?utm_referrer=explore",
-    link_image:
+    "id": 882,
+    "job_id": "rngl181",
+    "job_title": "Admin Finance",
+    "company": "CITRANET (PT Jembatan Citra Nusantara)",
+    "category": "Finance Accounting",
+    "location": "Kapanewon Wonosari, Gunungkidul, DI Yogyakarta, Indonesia",
+    "work_type": "Kontrak",
+    "working_type": "Tidak ditampilkan",
+    "salary": "Rp2jt-Rp3jt",
+    "experience": "Kurang dari setahun",
+    "skills": "Microsoft Excel",
+    "study_requirement": "SMA/SMK",
+    "link": "https://glints.com/id/opportunities/jobs/admin-finance/a55dab63-8506-4263-9c9c-359879526443?utm_referrer=explore",
+    "link_image":
       "https://images.glints.com/unsafe/glints-dashboard.s3.amazonaws.com/company-logo/931eb47322dfee14563516a3bdf1e54d.jpeg",
   },
   {
