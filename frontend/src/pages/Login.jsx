@@ -12,6 +12,8 @@ const Login = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const [userData, setUserData] = useState({});
+
   function handleSubmit(event) {
     event.preventDefault();
     axios.post("http://localhost:8090/login", formData)
@@ -29,18 +31,25 @@ const Login = () => {
 
         if (sessionStorage.getItem("token")){
           setTimeout(() => {
-           return location.href = "/jobs";
-          }, 300);
+              axios.get("http://localhost:8090/jobs")
+                .then((res) => {
+                  setUserData(res.data);
+                  console.log(res.data);
+                })
+                .catch((error) => {
+                  console.log(error.response);
+                });
+           return location.href = "/home";
+          }, 5000);
         } else {
           setTimeout(() => {
-            return location.href = "/home";
+            return location.href = "/login";
           }, 300);
         }
       })
       .catch((error) => {
         console.log(error.response);
       });
-    
   }
   return (
     <>
