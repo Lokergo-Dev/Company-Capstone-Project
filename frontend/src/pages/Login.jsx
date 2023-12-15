@@ -1,6 +1,11 @@
 import { useState } from "react";
+<<<<<<< HEAD
 import { Link } from "react-router-dom";
 import logo2 from "../assets/images/logo.png"
+=======
+import { Link, Navigate} from "react-router-dom";
+import axios from "axios";
+>>>>>>> d773a788246ffe606c51a4b7f4f18abd56c669a8
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +17,45 @@ const Login = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const [userData, setUserData] = useState({});
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    axios.post("http://localhost:8090/login", formData)
+      .then((res) => {
+        console.log(res.data);
+        const token = res.data.token;
+
+        if (!token){
+          alert("Login gagal");
+          return;
+        }
+
+        sessionStorage.setItem("user", JSON.stringify(res.data.user));
+        sessionStorage.setItem("token", token);
+
+        if (sessionStorage.getItem("token")){
+          setTimeout(() => {
+              axios.get("http://localhost:8090/jobs")
+                .then((res) => {
+                  setUserData(res.data);
+                  console.log(res.data);
+                })
+                .catch((error) => {
+                  console.log(error.response);
+                });
+           return location.href = "/home";
+          }, 5000);
+        } else {
+          setTimeout(() => {
+            return location.href = "/login";
+          }, 300);
+        }
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  }
   return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -27,7 +71,7 @@ const Login = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST">
+          <form className="space-y-6" onSubmit={handleSubmit} method="POST">
             <div>
               <label
                 htmlFor="email"
@@ -44,6 +88,8 @@ const Login = () => {
                   onChange={handleInputChange}
                   required
                   className="block w-full rounded-md border-0 px-3 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6"
+                  value={formData.email}
+                  onChange={handleInputChange}
                 />
               </div>
             </div>
@@ -72,6 +118,8 @@ const Login = () => {
                   onChange={handleInputChange}
                   required
                   className="block w-full rounded-md border-0 px-3 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6"
+                  value={formData.password}
+                  onChange={handleInputChange}
                 />
               </div>
             </div>
