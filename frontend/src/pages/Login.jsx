@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate} from "react-router-dom";
 import axios from "axios";
 
 const Login = () => {
@@ -12,13 +12,40 @@ const Login = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const [userData, setUserData] = useState({});
+
   function handleSubmit(event) {
     event.preventDefault();
-    axios
-      .post("http://localhost:8090/login", formData)
+    axios.post("http://localhost:8090/login", formData)
       .then((res) => {
-        console.log(res);
         console.log(res.data);
+        const token = res.data.token;
+
+        if (!token){
+          alert("Login gagal");
+          return;
+        }
+
+        sessionStorage.setItem("user", JSON.stringify(res.data.user));
+        sessionStorage.setItem("token", token);
+
+        if (sessionStorage.getItem("token")){
+          setTimeout(() => {
+              axios.get("http://localhost:8090/jobs")
+                .then((res) => {
+                  setUserData(res.data);
+                  console.log(res.data);
+                })
+                .catch((error) => {
+                  console.log(error.response);
+                });
+           return location.href = "/home";
+          }, 5000);
+        } else {
+          setTimeout(() => {
+            return location.href = "/login";
+          }, 300);
+        }
       })
       .catch((error) => {
         console.log(error.response);

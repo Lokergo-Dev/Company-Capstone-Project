@@ -15,6 +15,7 @@ import {
   PlusIcon,
   Squares2X2Icon,
 } from "@heroicons/react/20/solid";
+import axios from "axios";
 
 const sortOptions = [
   { name: "Most Popular", href: "#", current: true },
@@ -58,14 +59,58 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const Jobs = () => {
+const Jobs = () => {  
+  const [userData, setUserData] = useState([
+    sessionStorage.getItem("user")
+  ]);
+
+  const [jobsData, setJobsData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [cleanedData, setCleanedData] = useState([]);
+
+  useEffect(() => {
+    axios.post("http://localhost:8090/getJobs", userData)
+      .then((res) => {
+        console.log(res.data);
+        setJobsData(res.data);
+        
+        // console.log(jobsData);
+        // const cleanedData = res.data.map(item => ({
+        //   id: item.id,
+        //   job_id: item.job_id.trim(),
+        //   job_title: item.job_title.trim(),
+        //   company: item.company.trim(),
+        //   category: item.category.trim(),
+        //   location: item.location.trim(),
+        //   work_type: item.work_type.trim(),
+        //   working_type: item.working_type.trim(),
+        //   salary: item.salary.trim(),
+        //   experience: item.experience.trim(),
+        //   skills: item.skills.trim(),
+        //   study_requirement: item.study_requirement.trim(),
+        //   description: item.description.trim(),
+        //   link: item.link.trim(),
+        //   link_image: item.link_image.trim()
+        // }));
+
+        // setCleanedData(cleanedData);
+        // console.log(cleanedData);
+        setIsLoading(false);
+        
+      })
+      .catch((error) => {
+        console.log(error.response);
+        setIsLoading(false);
+      });
+  }, []);
+
   const [search, setSearch] = useState("");
 
   const [visibleData, setVisibleData] = useState([]);
 
   useEffect(() => {
-    // Ambil 6 data pertama dari JSON lokal
-    const initialData = data.slice(0, 6);
+    
+    const initialData = jobsData.slice(0, 6);
     setVisibleData(initialData);
   }, []);
 
@@ -112,6 +157,10 @@ const Jobs = () => {
   };
 
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+
+  if(isLoading){
+    return <h1>Loading...</h1>
+  }
 
   return (
     <>
