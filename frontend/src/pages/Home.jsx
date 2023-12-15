@@ -1,19 +1,17 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import all from "../assets/images/all.svg";
 import management from "../assets/images/management.svg";
 import finance from "../assets/images/finance.svg";
 import human from "../assets/images/human.svg";
 import retail from "../assets/images/retail.svg";
 import content from "../assets/images/content.svg";
-import { IoLocationOutline } from "react-icons/io5";
-import { LuBookmarkPlus } from "react-icons/lu";
-import { FaArrowRightLong } from "react-icons/fa6";
-import { SlLocationPin } from "react-icons/sl";
+import subscribes from "../assets/images/subscribes.jpg";
+import { FaArrowRightLong, FaArrowRight } from "react-icons/fa6";
 import { GoSearch } from "react-icons/go";
-import { PiSuitcaseSimple } from "react-icons/pi";
-import { data } from "../../../backend/data";
 import value from "../assets/images/value.png";
 import hero from "../assets/images/hero.png";
+import JobsList from "../components/Jobs/JobsList";
+import PaginationComp from "../components/Pagination/Pagination";
 
 const stats = [
   { name: "Jobs", value: "550K" },
@@ -31,14 +29,6 @@ const bidang = [
 
 const Home = () => {
   const [search, setSearch] = useState("");
-
-  const [visibleData, setVisibleData] = useState([]);
-
-  useEffect(() => {
-    // Ambil 6 data pertama dari JSON lokal
-    const initialData = data.slice(0, 6);
-    setVisibleData(initialData);
-  }, []);
 
   const [selectedValue, setSelectedValue] = useState("");
   const handleSelectChange = (event) => {
@@ -88,7 +78,7 @@ const Home = () => {
         <div className="overflow-hidden bg-white">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
-              <div className="relative mx-auto max-w-7xl px-4 sm:static sm:px-6 lg:px-8">
+              <div className="mx-auto max-w-7xl px-4 sm:static sm:px-6 lg:px-8">
                 <div className="my-5 lg:max-w-lg">
                   <h2 className="text-base text-center font-reguler leading-7 inline-block rounded border-transparent px-4 py-1.5 bg-[#FFF1E0] text-[#DB9B10]">
                     🏅 Platform pencarian kerja terkemuka di dunia
@@ -102,44 +92,8 @@ const Home = () => {
                     untuk menemukan lowongan pekerjaan di berbagai industri dan
                     sektor
                   </p>
-                  <div className="bg-white flex flex-row rounded-md shadow-md justify-between mt-12 p-[10px] min-[360px]:flex-wrap">
+                  <div className="w-[300px] bg-white flex flex-row rounded-md shadow-md justify-between mt-12 p-[10px] min-[360px]:flex-wrap">
                     <div className="flex md:divide-x max-[390px]:divide-y min-[360px]:flex-wrap">
-                      <div className="mr-5 self-center">
-                        <form className="flex items-center p-2">
-                          <PiSuitcaseSimple className="mr-1 text-gray-500" />
-                          <select
-                            value={selectedValue}
-                            onChange={handleSelectChange}
-                            name=""
-                            id="relevance"
-                            className="gb-white text-gray-500 rounded-[3px] lg:w-[5.5rem] min-[360px]:w-[14rem]">
-                            <option value="">Category</option>
-                            {data.map((data) => (
-                              <option key={data.id} value={data.category}>
-                                {data.category}
-                              </option>
-                            ))}
-                          </select>
-                        </form>
-                      </div>
-                      <div className="mr-5 self-center">
-                        <form className="flex items-center p-2">
-                          <SlLocationPin className="mr-1 text-gray-500" />
-                          <select
-                            value={selectedValue}
-                            onChange={handleSelectChange}
-                            name=""
-                            id="relevance"
-                            className="gb-white text-gray-500 rounded-[3px] lg:w-[6rem] min-[360px]:w-[14rem]">
-                            <option value="">Location</option>
-                            {dataSet.map((item) => (
-                              <option key={item.id} value={item.nama}>
-                                {item.nama}
-                              </option>
-                            ))}
-                          </select>
-                        </form>
-                      </div>
                       <div className="mr-5 self-center">
                         <div className="flex items-center p-2">
                           <GoSearch className="mr-1 text-gray-500" />
@@ -148,14 +102,14 @@ const Home = () => {
                               onChange={(e) => setSearch(e.target.value)}
                               placeholder="Search Job...."
                               type="text"
-                              className="bg-transparent text-gray-500 focus:outline-none lg:w-[50px] min-[360px]:w-[210px]"
+                              className="bg-transparent text-gray-500 focus:outline-none lg:w-[150px] min-[360px]:w-[200px]"
                             />
                           </form>
                         </div>
                       </div>
                     </div>
                     <div className="self-center">
-                      <button className="lg:w-[70px] min-[360px]:w-[290px] rounded-md bg-primary px-3.5 py-2.5 text-sm font-reguler text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white hover:bg-hover hover:drop-shadow-lg transition ease-in-out delay-50 hover:-translate-y-0.5 duration-300">
+                      <button className="lg:w-[70px] min-[360px]:w-[280px] rounded-md bg-primary px-3.5 py-2.5 text-sm font-reguler text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white hover:bg-hover hover:drop-shadow-lg transition ease-in-out delay-50 hover:-translate-y-0.5 duration-300">
                         <a href="/jobs" className="flex justify-center">
                           Search
                         </a>
@@ -178,7 +132,7 @@ const Home = () => {
       {/* ===== PERFORMANCE SECTION ===== */}
       <section className="performance">
         <div className="relative isolate overflow-hidden bg-darkGray py-20 sm:py-20">
-          <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:px-20 lg:max-w-none lg:grid-cols-2 items-center">
+          <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:px-24 lg:max-w-none lg:grid-cols-2 items-center">
             <div className="mx-auto max-w-2xl lg:mx-0">
               <h2 className="text-5xl mx-auto sm:static font-bold tracking-tight text-black text-center">
                 <span className="text-primary">Kinerja produktivitas </span>kami
@@ -208,48 +162,26 @@ const Home = () => {
       <section className="value">
         <div className="bg-white">
           <div className="mx-auto max-w-7xl sm:px-10 lg:px-8">
-            <div className="relative isolate overflow-hidden bg-gray-900 px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
-              <svg
-                viewBox="0 0 1024 1024"
-                className="absolute left-1/2 top-1/2 -z-10 h-[64rem] w-[rem] -translate-y-1/2 [mask-image:radial-gradient(closest-side,white,transparent)] sm:left-full sm:-ml-80 lg:left-1/2 lg:ml-0 lg:-translate-x-1/2 lg:translate-y-0"
-                aria-hidden="true">
-                <circle
-                  cx={512}
-                  cy={512}
-                  r={512}
-                  fill="url(#759c1415-0410-454c-8f7c-9a820de03641)"
-                  fillOpacity="0.7"
-                />
-                <defs>
-                  <radialGradient id="759c1415-0410-454c-8f7c-9a820de03641">
-                    <stop stopColor="#7775D6" />
-                    <stop offset={1} stopColor="#3C65F5" />
-                  </radialGradient>
-                </defs>
-              </svg>
+            <div className="relative isolate overflow-hidden bg-white px-6 pt-16 sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
               <div className="mx-auto max-w-md text-center lg:mx-0 lg:flex-auto lg:py-32 lg:text-left">
                 <h2 className="text-base text-center font-reguler leading-7 inline-block rounded border-transparent px-4 py-1.5 bg-[#FFF1E0] text-[#DB9B10]">
                   🔎 Temukan pekerjaan
                 </h2>
-                <h2 className="text-3xl mt-6 font-bold tracking-tight text-white sm:text-4xl">
+                <h2 className="text-3xl mt-6 font-bold tracking-tight text-black sm:text-4xl">
                   Satu langkah mudah untuk mengubah
                   <span className="text-primary"> masa depanmu.</span>
                 </h2>
-                <p className="mt-6 text-lg leading-8 text-gray-300">
+                <p className="mt-6 text-lg leading-8 text-gray-400">
                   Anda dapat menemukan berbagai solusi hanya dengan mengakses
                   platform kami. Karena kami berkomitmen untuk menjaganya
                   kualitas layanan pengguna
                 </p>
                 <div className="mt-10 flex items-center justify-center gap-x-6 lg:justify-start">
                   <a
-                    href="#"
-                    className="rounded-md bg-primary px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white hover:bg-hover hover:drop-shadow-lg transition ease-in-out delay-50 hover:-translate-y-0.5 duration-300">
-                    Memulai
-                  </a>
-                  <a
-                    href="#"
-                    className="text-sm font-semibold leading-6 text-white hover:drop-shadow-lg transition ease-in-out delay-50 hover:-translate-y-0.5 duration-300">
-                    Temukan Pekerjaan <span aria-hidden="true">→</span>
+                    href="/jobs"
+                    className="flex items-center rounded-md bg-primary px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white hover:bg-hover hover:drop-shadow-lg transition ease-in-out delay-50 hover:-translate-y-0.5 duration-300">
+                    Mulai
+                    <FaArrowRight className="ml-2" />
                   </a>
                 </div>
               </div>
@@ -330,7 +262,7 @@ const Home = () => {
           </div>
           <div className="text-center mt-10">
             <div className="inline-block">
-              <ul role="" className="flex flex-wrap justify-center gap-5">
+              <ul className="flex flex-wrap justify-center gap-5">
                 {bidang.map((tipe) => (
                   <li key={tipe.id} className="">
                     <button className="font-semibold border-[2px] rounded-[10px] block p-[10px] w- text-[14px] hover:border-primary hover:text-primary transition ease-in-out delay-50 hover:-translate-y-1.5 duration-300">
@@ -345,76 +277,12 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="lg:col-span-3 lex-wrap">
-            <div className="flex flex-wrap gap-5 px-8 pt-5 justify-center items-center">
-              {visibleData.map((item) => {
-                return (
-                  <>
-                    <div>
-                      <div
-                        key={item.id}
-                        className="w-[280px] h-[280px] p-[20px] border-[1px] bg-gray-50 rounded-md hover:bg-white hover:shadow-lg hover:border-primary transition ease-in-out delay-100 hover:-translate-y-1 duration-300">
-                        <div className="flex flex-col justify-between">
-                          <div className="flex justify-between gap-3">
-                            <img
-                              src={item.link_image}
-                              alt="Company Logo"
-                              className="w-[50px] h-[50px] self-start p-1 rounded border border-gray-200"
-                            />
-                            <div
-                              className="flex flex-col self-start truncate"
-                              aria-label="company-label">
-                              <h3 className="text-md text-ellipsis font-semibold block hover:text-primary transition ease-in-out delay-100 duration-300">
-                                {item.company}
-                              </h3>
-                              <div className=" flex text-sm gap-1 text-black">
-                                <h2 className="flex items-center">
-                                  <IoLocationOutline /> {item.location}
-                                </h2>
-                              </div>
-                            </div>
-                            <div className="w-50 h-50 p-1 self-start rounded border border-gray-200">
-                              <LuBookmarkPlus />
-                            </div>
-                          </div>
-                          <div className="pt-5">
-                            <button className="rounded-md truncate bg-gray-200 p-1.5 text-sm font-medium text-gray-500 shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white hover:text-primary transition ease-in-out delay-100 duration-300">
-                              {item.work_type}
-                            </button>
-                          </div>
-                          <div className="flex-col justify-between truncate items-center gap-4 pt-5">
-                            <a href="">
-                              <h1 className="text-[16px] font-semmibold text-color truncate hover:text-primary transition ease-in-out delay-100 duration-300">
-                                {item.job_title}
-                              </h1>
-                            </a>
-                          </div>
-                          <p className="text-[13px] text-[#959595] truncate pt-5">
-                            Skills: {item.skills}
-                          </p>
-                          <div className="flex gap-x-2 pt-5 justify-between">
-                            <div className="flex truncate">
-                              <h1 className="text-md font-bold self-end truncate text-primary">
-                                {item.salary}
-                              </h1>
-                              <h2 className="text-xs text-gray-400 self-end">
-                                /Month
-                              </h2>
-                            </div>
-                            <button className="border rounded block p-1 w-[40%] text-[12px] font-medium text-primary border-primary hover:bg-primary hover:border-primary hover:text-white transition ease-in-out delay-100 duration-300">
-                              <a href="/jobs">Apply Now</a>
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </>
-                );
-              })}
-            </div>
+          <div>
+            <JobsList />
+            <PaginationComp />
           </div>
 
-          <div className="text-center py-10">
+          <div className="text-center py-2">
             <button className="rounded-md bg-primary px-3.5 py-2.5 text-sm font-reguler text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white hover:bg-hover hover:drop-shadow-lg transition ease-in-out delay-50 hover:-translate-y-0.5 duration-300">
               <a href="/jobs" className="flex items-center">
                 Selengkapnya
@@ -429,8 +297,8 @@ const Home = () => {
         <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="relative isolate overflow-hidden px-6 py-6 shadow-2xl sm:rounded-3xl sm:px-16 lg:flex lg:gap-x-20 lg:px-10 lg:py-10">
             <img
-              className="absolute inset-0 -z-10 h-full w-full object-cover object-right md:object-center opacity-20 "
-              src="https://img.freepik.com/free-vector/white-irregular-organic-lines-seamless-pattern-blue-background_1409-4447.jpg?w=1480&t=st=1701263186~exp=1701263786~hmac=4fdb5b3f69b67936f21dfee5a51d1f6ef8e33569b92beb3342021e29631f1078"
+              className="absolute inset-0 -z-10 h-full w-full object-cover object-right md:object-center opacity-100 "
+              src={subscribes}
               alt=""
             />
             <div className="mx-auto grid gap-y-6 max-w-2xl grid-cols-1 gap-x-40 lg:max-w-none lg:grid-cols-2">
@@ -442,7 +310,7 @@ const Home = () => {
                 </h6>
               </div>
               <div className="max-w-xl my-auto lg:max-w-lg">
-                <p className="text-sm leading-4 text-gray-500 text-left">
+                <p className="text-sm leading-4 text-black text-center">
                   Dengan bergabung bersama kami, Anda telah mengambil keputusan
                   yang bijaksana pencarian kerja Anda lebih transparan, mudah
                   dan cepat

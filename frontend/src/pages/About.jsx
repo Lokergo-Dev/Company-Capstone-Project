@@ -54,8 +54,9 @@ const About = () => {
             Temui tim kami
           </h2>
           <p className="mt-6 text-lg leading-8 text-gray-600">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Tim pengembang kami dikenal karena kerjasama yang kuat dan semangat
+            untuk menciptakan perubahan. Di sini, setiap ide dihargai, dan
+            setiap kontribusi memainkan peran penting dalam mencapai visi kami.
           </p>
         </div>
         <ul

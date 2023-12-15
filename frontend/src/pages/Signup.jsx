@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import signupImg from "../assets/images/signup.gif";
 import avatar from "../assets/images/avatar.jpg";
 import { Link } from "react-router-dom";
+import logo2 from "../assets/images/logo.png";
 
 const Signup = () => {
   const [selectedFile, setselectedFIle] = useState(null);
@@ -29,99 +30,112 @@ const Signup = () => {
   };
 
   return (
-    <section className="px-5 xl:px-0">
-      <div className="max-w-[1170px] mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2">
-          <div className="hidden lg:block">
-            <figure className="rounded-l-lg">
-              <img src={signupImg} alt="" />
-            </figure>
-          </div>
-
-          <div className="rounded-l-lg lg:pl-16 py-10">
-            <h3 className="text-headingColor text-[22px] leading-9 font-bold mb-10">
-              Create an <span className="text-primary">account</span>
-            </h3>
-
-            <form onSubmit={submitHandler}>
-              <div className="mb-5">
-                <input
-                  type="text"
-                  placeholder="Full name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  className="w-full pr-4 py-3 border-b border-solid border-[#0066ff61] focus:outline-none focus:border-b-primaryColor text-[16px] leading-7 text-headingColor placeholder:text-textColor rounded-md cursor-pointer"
-                  required
-                />
-              </div>
-              <div className="mb-5">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  className="w-full pr-4 py-3 border-b border-solid border-[#0066ff61] focus:outline-none focus:border-b-primaryColor text-[16px] leading-7 text-headingColor placeholder:text-textColor rounded-md cursor-pointer"
-                  required
-                />
-              </div>
-              <div className="mb-5">
-                <input
-                  type="password"
-                  placeholder="Password"
-                  name="password"
-                  value={formData.password}
-                  onChange={handleInputChange}
-                  className="w-full pr-4 py-3 border-b border-solid border-[#0066ff61] focus:outline-none focus:border-b-primaryColor text-[16px] leading-7 text-headingColor placeholder:text-textColor rounded-md cursor-pointer"
-                  required
-                />
-              </div>
-
-              <div className="mb-5 flex items-center gap-3">
-                <figure className="w-[60px] h-[60px] flex items-center justify-center">
-                  <img src={avatar} alt="" className="w-full rounded-full" />
-                </figure>
-
-                <div className="relative w-[130px] h-[50px]">
-                  <input
-                    type="file"
-                    name="photo"
-                    id="customFile"
-                    onChange={handleFileInputChange}
-                    accept=".jpg, .png"
-                    className="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer"
-                  />
-
-                  <label
-                    htmlFor="customeFile"
-                    className="absolute top-0 left-0 w-full h-full flex items-center px-[0.75rem] py-[0.375rem] text-[15px] leading-6 overflow-hidden bg-[#0066ff46] text-headingColor font-semibold rounded-lg truncate cursor-pointer">
-                    Upload Photo
-                  </label>
-                </div>
-              </div>
-
-              <div className="mt-7">
-                <button
-                  type="submit"
-                  className="w-full bg-primary text-white text-[18px] leading-[30px] rounded-lg px-4 py-3 hover:bg-hover hover:drop-shadow-lg transition ease-in-out delay-50 hover:-translate-y-0.5 duration-300">
-                  Sign Up
-                </button>
-              </div>
-
-              <p className="mt-5 text-textColor text-center">
-                Already have an account?
-                <Link
-                  to="/login"
-                  className="text-primary font-medium ml-1">
-                  Login
-                </Link>
-              </p>
-            </form>
-          </div>
-        </div>
+    <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+      <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+        <img className="mx-auto h-10 w-auto" src={logo2} alt="Your Company" />
+        <h3 className="mt-4 text-center text-headingColor text-[22px] leading-9 font-bold">
+          Buat Akun Baru
+        </h3>
       </div>
-    </section>
+
+      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-sm">
+        <form onSubmit={submitHandler}>
+          <div className="mb-5">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium leading-6 text-gray-900">
+              Email address
+            </label>
+            <div className="mt-2">
+              <input
+                id="text"
+                name="name"
+                type="name"
+                placeholder="Enter your name"
+                value={formData.name}
+                onChange={handleInputChange}
+                required
+                className="block w-full rounded-md border-0 px-3 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6"
+              />
+            </div>
+          </div>
+          <div className="mb-5">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium leading-6 text-gray-900">
+              Email address
+            </label>
+            <div className="mt-2">
+              <input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="Enter your email"
+                autoComplete="email"
+                value={formData.email}
+                onChange={handleInputChange}
+                required
+                className="block w-full rounded-md border-0 px-3 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6"
+              />
+            </div>
+          </div>
+          <div className="mb-5">
+            <div className="flex items-center justify-between">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium leading-6 text-gray-900">
+                Password
+              </label>
+            </div>
+            <div className="mt-2">
+              <input
+                id="password"
+                name="password"
+                type="password"
+                placeholder="Enter your password"
+                autoComplete="current-password"
+                value={formData.password}
+                onChange={handleInputChange}
+                className="block w-full rounded-md border-0 px-3 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6"
+                required
+              />
+            </div>
+          </div>
+
+          <div className="mb-5 flex items-center gap-3">
+            <figure className="w-[60px] h-[60px] flex items-center justify-center">
+              <img src={avatar} alt="" className="w-full rounded-full" />
+            </figure>
+
+            <div className="w-[210px] h-[30px]">
+              <input
+                type="file"
+                name="photo"
+                id="customFile"
+                onChange={handleFileInputChange}
+                accept=".jpg, .png"
+                className="top-0 left-0 w-full h-full overflow-hidden cursor-pointer"
+              />
+            </div>
+          </div>
+
+          <div className="mt-7">
+            <button
+              type="submit"
+              className="flex w-full justify-center rounded-md bg-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition ease-in-out delay-50 hover:-translate-y-0.5 duration-300">
+              Daftar
+            </button>
+          </div>
+
+          <p className="mt-5 text-textColor text-center">
+            Already have an account?
+            <Link to="/login" className="text-primary font-medium ml-1">
+              Login
+            </Link>
+          </p>
+        </form>
+      </div>
+    </div>
   );
 };
 
