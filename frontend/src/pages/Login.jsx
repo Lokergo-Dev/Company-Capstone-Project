@@ -31,7 +31,7 @@ const Login = () => {
 
         if (sessionStorage.getItem("token")){
           setTimeout(() => {
-              axios.get("http://localhost:8090/jobs")
+              axios.post("http://localhost:8090/jobs", sessionStorage.getItem("user"))
                 .then((res) => {
                   setUserData(res.data);
                   console.log(res.data);

@@ -185,7 +185,7 @@ app.post("/getJobs", (req, res) => {
 
         const recommendation = results[0].user_1st_recommendation.split(',').map(item => item.trim().replace(/'/g, ''));
 
-        query1 = `SELECT * FROM pekerjaan WHERE job_id IN (${recommendation.map(id => mysql.escape(id)).join(',')}) LIMIT 1`;
+        query1 = `SELECT * FROM pekerjaan WHERE job_id IN (${recommendation.map(id => mysql.escape(id)).join(',')})`;
         db.query(query1, (err, results) => {
                 if (err) {
                     console.error('Error querying MySQL:', err);
@@ -193,9 +193,10 @@ app.post("/getJobs", (req, res) => {
                 }
 
                 const jsonJobs = JSON.stringify(results);
-                res.status(200).json({jsonJobs});
+                res.status(200).json({ jobs: jsonJobs });
                 
                 console.log(jsonJobs);
+                // res.status(200).json({ jobs: jsonJobs });
             });
         // console.log(recommendation);
     });
