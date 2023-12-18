@@ -1,5 +1,4 @@
 import { useState } from "react";
-import signupImg from "../assets/images/signup.gif";
 import avatar from "../assets/images/avatar.jpg";
 import { Link } from "react-router-dom";
 import logo2 from "../assets/images/logo.png";

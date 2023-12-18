@@ -1,19 +1,9 @@
 {
-<<<<<<< HEAD
-  "name": "lokergo",
-=======
   "name": "backend",
->>>>>>> d773a788246ffe606c51a4b7f4f18abd56c669a8
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-<<<<<<< HEAD
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "lokergo",
-  "license": "ISC"
-=======
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon -r dotenv/config app.js"
   },
@@ -34,5 +24,4 @@
   "devDependencies": {
     "nodemon": "^3.0.2"
   }
->>>>>>> d773a788246ffe606c51a4b7f4f18abd56c669a8
 }

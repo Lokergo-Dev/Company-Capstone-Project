@@ -105,23 +105,23 @@ app.get('/jobs', (req, res) => {
         .then(response => {
             const parsedData = response.data;
 
-            // // Menghapus karakter \r\n pada key objek1
-            // for (const key in parsedData[1]) {
-            //     if (Object.prototype.hasOwnProperty.call(parsedData[1], key)) {
-            //         const newKey = key.replace(/\r\n/g, '');
-            //         parsedData[1][newKey] = "";
-            //         delete parsedData[1][key];
-            //     }
-            // }
+            {/* Menghapus karakter \r\n pada key objek1
+            for (const key in parsedData[1]) {
+            if (Object.prototype.hasOwnProperty.call(parsedData[1], key)) {
+            const newKey = key.replace(/\r\n/g, '');
+            parsedData[1][newKey] = "";
+            delete parsedData[1][key];
+            }
+            }
 
-            // // Menghapus karakter \r\n pada key objek2
-            // for (const key in parsedData[2]) {
-            //     if (Object.prototype.hasOwnProperty.call(parsedData[2], key)) {
-            //         const newKey = key.replace(/\r\n/g, '');
-            //         parsedData[2][newKey] = "";
-            //         delete parsedData[2][key];
-            //     }
-            // }
+            Menghapus karakter \r\n pada key objek2
+            for (const key in parsedData[2]) {
+            if (Object.prototype.hasOwnProperty.call(parsedData[2], key)) {
+            const newKey = key.replace(/\r\n/g, '');
+            parsedData[2][newKey] = "";
+            delete parsedData[2][key];
+            }
+            }*/}
 
             const keyObject1 = Object.keys(parsedData[1]);
             const keyObject2 = Object.keys(parsedData[2]);

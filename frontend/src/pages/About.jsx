@@ -1,4 +1,3 @@
-import React from "react";
 import aliv from "../assets/images/Aliv.jpg";
 import fakhrie from "../assets/images/Fakhrie.jpg";
 import yustaf from "../assets/images/Yustaf.jpg";

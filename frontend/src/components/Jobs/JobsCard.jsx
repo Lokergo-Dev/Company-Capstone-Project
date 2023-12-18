@@ -1,3 +1,4 @@
+import { React, useState, useEffect } from "react";
 import { IoLocationOutline } from "react-icons/io5";
 import { LuBookmarkPlus } from "react-icons/lu";
 import { FaRegBuilding } from "react-icons/fa";
@@ -17,7 +18,7 @@ const JobsCard = ({ data }) => {
   return (
     <div>
       <a
-        href="/jobs/:id"
+        href="/Jobs/:id"
         className="flex flex-wrap gap-4 justify-center items-center">
         <div
           key={id}
