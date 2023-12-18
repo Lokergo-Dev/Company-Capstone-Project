@@ -63,51 +63,9 @@ const Jobs = () => {
 
   useEffect(() => {
     // Ambil 6 data pertama dari JSON lokal
-    const initialData = data.slice(0, 6);
+    const initialData = data.slice(0, 8);
     setVisibleData(initialData);
   }, []);
-
-  const [selectedValue, setSelectedValue] = useState("");
-  const [dataSet] = useState([
-    { id: "1", nama: "ACEH" },
-    { id: "2", nama: "SUMATERA UTARA" },
-    { id: "3", nama: "SUMATERA BARAT" },
-    { id: "4", nama: "RIAU" },
-    { id: "5", nama: "JAMBI" },
-    { id: "6", nama: "SUMATERA SELATAN" },
-    { id: "7", nama: "BENGKULU" },
-    { id: "8", nama: "LAMPUNG" },
-    { id: "9", nama: "KEPULAUAN BANGKA BELITUNG" },
-    { id: "10", nama: "KEPULAUAN RIAU" },
-    { id: "11", nama: "DKI JAKARTA" },
-    { id: "12", nama: "JAWA BARAT" },
-    { id: "13", nama: "JAWA TENGAH" },
-    { id: "14", nama: "DAERAH ISTIMEWA YOGYAKARTA" },
-    { id: "15", nama: "JAWA TIMUR" },
-    { id: "16", nama: "BANTEN" },
-    { id: "17", nama: "BALI" },
-    { id: "18", nama: "NUSA TENGGARA BARAT" },
-    { id: "19", nama: "NUSA TENGGARA TIMUR" },
-    { id: "20", nama: "KALIMANTAN BARAT" },
-    { id: "21", nama: "KALIMANTAN TENGAH" },
-    { id: "22", nama: "KALIMANTAN SELATAN" },
-    { id: "23", nama: "KALIMANTAN TIMUR" },
-    { id: "24", nama: "KALIMANTAN UTARA" },
-    { id: "25", nama: "SULAWESI UTARA" },
-    { id: "26", nama: "SULAWESI TENGAH" },
-    { id: "27", nama: "SULAWESI SELATAN" },
-    { id: "28", nama: "SULAWESI TENGGARA" },
-    { id: "29", nama: "GORONTALO" },
-    { id: "30", nama: "SULAWESI BARAT" },
-    { id: "31", nama: "MALUKU" },
-    { id: "32", nama: "MALUKU UTARA" },
-    { id: "33", nama: "PAPUA" },
-    { id: "34", nama: "PAPUA BARAT" },
-  ]);
-
-  const handleSelectChange = (event) => {
-    setSelectedValue(event.target.value);
-  };
 
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
@@ -425,7 +383,7 @@ const Jobs = () => {
                           <div
                             className="flex flex-col self-start truncate"
                             aria-label="company-label">
-                            <a href="">
+                            <a href="/jobs/:id">
                               <h1 className="text-lg font-bold text-color truncate hover:text-primary transition ease-in-out delay-100 duration-300">
                                 {item.job_title}
                               </h1>
@@ -445,18 +403,18 @@ const Jobs = () => {
                             {item.work_type}
                           </button>
                         </div>
-                        <div className="flex flex-row justify-start items-center truncate pt-5">
+                        <a href="/jobs/:id" className="flex flex-row justify-start items-center truncate pt-5">
                           <div className="mr-1">
                             <FaRegBuilding />
                           </div>
                           <h3 className="text-xs text-ellipsis font-semibold block hover:text-primary transition ease-in-out delay-100 duration-300">
                             {item.company}
                           </h3>
-                        </div>
+                        </a>
                         <p className="text-[13px] text-[#959595] truncate pt-5">
                           Skills: {item.skills}
                         </p>
-                        <div className="flex gap-x-2 pt-5 justify-between">
+                        <div className="flex gap-x-2 pt-5 justify-between truncate">
                           <div className="flex truncate">
                             <h1 className="text-md font-bold self-end truncate text-primary">
                               {item.salary}
@@ -544,7 +502,7 @@ const Jobs = () => {
                         <p className="text-[13px] text-[#959595] truncate pt-5">
                           Skills: {item.skills}
                         </p>
-                        <div className="flex gap-x-2 pt-5 justify-between">
+                        <div className="flex gap-x-2 pt-5 justify-between truncate">
                           <div className="flex truncate">
                             <h1 className="text-md font-bold self-end truncate text-primary">
                               {item.salary}
@@ -632,7 +590,7 @@ const Jobs = () => {
                         <p className="text-[13px] text-[#959595] truncate pt-5">
                           Skills: {item.skills}
                         </p>
-                        <div className="flex gap-x-2 pt-5 justify-between">
+                        <div className="flex gap-x-2 pt-5 justify-between truncate">
                           <div className="flex truncate">
                             <h1 className="text-md font-bold self-end truncate text-primary">
                               {item.salary}

@@ -2,6 +2,7 @@ import { React, useState, useEffect } from "react";
 import { IoLocationOutline } from "react-icons/io5";
 import { LuBookmarkPlus } from "react-icons/lu";
 import { FaRegBuilding } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const JobsCard = ({ data }) => {
   const {
@@ -13,12 +14,12 @@ const JobsCard = ({ data }) => {
     skills,
     salary,
     location,
+    link,
   } = data;
 
   return (
     <div>
-      <a
-        href="/Jobs/:id"
+      <div
         className="flex flex-wrap gap-4 justify-center items-center">
         <div
           key={id}
@@ -33,7 +34,7 @@ const JobsCard = ({ data }) => {
               <div
                 className="flex flex-col self-start truncate"
                 aria-label="company-label">
-                <a href="">
+                <a href="/jobs/:id">
                   <h1 className="text-lg font-bold text-color truncate hover:text-primary transition ease-in-out delay-100 duration-300">
                     {job_title}
                   </h1>
@@ -58,7 +59,7 @@ const JobsCard = ({ data }) => {
                 <FaRegBuilding />
               </div>
               <h3 className="text-xs text-ellipsis font-semibold block hover:text-primary transition ease-in-out delay-100 duration-300">
-                {company}
+                <a href="/jobs/:id">{company}</a>
               </h3>
             </div>
             <p className="text-[13px] text-[#959595] truncate pt-5">
@@ -72,12 +73,12 @@ const JobsCard = ({ data }) => {
                 <h2 className="text-xs text-gray-400 self-end">/Month</h2>
               </div>
               <button className="border rounded block p-1 w-[40%] text-[12px] font-medium text-primary border-primary hover:bg-primary hover:border-primary hover:text-white transition ease-in-out delay-100 duration-300">
-                <a href="/jobs">Apply Now</a>
+                <a href={link}>Apply Now</a>
               </button>
             </div>
           </div>
         </div>
-      </a>
+      </div>
     </div>
   );
 };
