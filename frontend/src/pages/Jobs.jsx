@@ -110,7 +110,7 @@ const Jobs = () => {
 
   useEffect(() => {
     
-    const initialData = jobsData.slice(0, 6);
+    const initialData = data.slice(0, 6);
     setVisibleData(initialData);
   }, []);
 

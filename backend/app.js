@@ -39,6 +39,9 @@ db.connect((err) => {
     }
 });
 
+app.get('/', (req, res) => {
+    res.status(200).json({ message: 'Nyari kerja ya?' });
+});
 
 app.post('/login', (req, res) => {
     const { email, password } = req.body;
